@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import 'lodash';
+// import App from './App';
+// import * as serviceWorker from './serviceWorker';
 
-import T from './test';
+// import T from './test';
 
-// fetch('http://localhost:9999').then(async (res) => {
-//   const data = await res.json()
-//   console.log(data)
-// })
+import T from './components/getMusicNotes';
 
-ReactDOM.render(<T/>, document.getElementById('root'));
+ReactDOM.render(<T />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// serviceWorker.unregister();

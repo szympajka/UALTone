@@ -1,13 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const fetch = require('node-fetch');
 
-const { storage } = require('./test');
-const { client } = require('./test2')
-const words = require('./words');
+const getImageDescriptors = require('./components/imageToNotes');
 
 const app = express();
 const port = process.env.PORT || 9999;
+
+const errors = {
+  URL_NOT_DEFINED: {
+    error: 'URL_NOT_DEFINED',
+    message: 'url is not defined',
+  },
+};
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,32 +23,18 @@ app.listen(port, () => {
   console.log(`API started on port ${port}`);
 });
 
-app.route('/').get((req, res) => {
-  res.send(words)
-  // client
-  // .labelDetection('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Clock_Tower_-_Palace_of_Westminster%2C_London_-_September_2006.jpg/220px-Clock_Tower_-_Palace_of_Westminster%2C_London_-_September_2006.jpg')
-  // .then(results => {
-  //   // const labels = results[0].labelAnnotations;
+app.route('/').get(async (req, res) => {
+  const { url } = req.query;
 
-  //   res.send(results);
+  if (!url) {
+    return res.status(400).send(errors.URL_NOT_DEFINED);
+  }
 
-  //   // console.log('Labels:');
-  //   // labels.forEach(label => console.log(label.description));
-  // })
-  // .catch(err => {
-  //   console.error('ERROR:', err);
-  // });
+  const imageBuffer = await fetch(url).then(r => r.buffer());
+  const base64Image = imageBuffer.toString('base64');
+  const responce = await getImageDescriptors({ base64Image });
 
-  // storage
-  //   .getBuckets()
-  //   .then((results) => {
-  //     const buckets = results[0];
-
-  //     res.send(results);
-  //   })
-  //   .catch((err) => {
-  //     console.error('ERROR:', err);
-  //   });
-}); // eslint-disable-line
+  return res.send(responce);
+});
 
 module.exports = app;
