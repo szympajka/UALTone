@@ -58,7 +58,7 @@ const playSong2 = () => {
 	const synth = new Tone.Synth().toMaster();
 	
 	const getToneTime = (note = '4n') => {
-		let notetime = 0;
+		let notetime = Tone.now();
 
 		console.log('notes', notes)
 		
@@ -78,25 +78,21 @@ const playSong2 = () => {
 	}
 
 	const notesToPlay = [
-		['C4', '4n'],
-		['F4', '4n'],
-		['F4', '4n'],
+		// ['fgaffgafab', '4n'],
+		// ['c', '2n'],
+		// ['ab', '4n'],
+		// ['c', '2n'],
+		// ['cdcb', '8n'],
+		// ['af', '4n'],
+		// ['cdcb', '8n'],
+		// ['af', '4n'],
+		// ['gc', '4n'],
+		// ['f', '2n'],
+		// ['gc', '4n'],
+		// ['f', '2n'],
 
-		['G4', '8n'],
-		['F4', '8n'],
-		['E4', '4n'],
-		['E4', '4n'],
-
 		['C4', '4n'],
-		['G4', '4n'],
-		['G4', '4n'],
-		
-		['A4', '8n'],
-		['G4', '8n'],
-		['F4', '2n'],
-		
-		['C4', '4n'],
-		['F4', '4n'],
+		['C#4', '4n'],
 		['F4', '4n'],
 
 		['G4', '8n'],
@@ -111,31 +107,53 @@ const playSong2 = () => {
 		['A4', '8n'],
 		['G4', '8n'],
 		['F4', '2n'],
+		
+		// ['C4', '4n'],
+		// ['F4', '4n'],
+		// ['F4', '4n'],
 
-		['C4', '4n'],
-		['A4', '4n'],
-		['A4', '4n'],
+		// ['G4', '8n'],
+		// ['F4', '8n'],
+		// ['E4', '4n'],
+		// ['E4', '4n'],
 
-		['B4', '8n'],
-		['A4', '8n'],
-		['G4', '4n'],
-		['G4', '4n'],
+		// ['C4', '4n'],
+		// ['G4', '4n'],
+		// ['G4', '4n'],
+		
+		// ['A4', '8n'],
+		// ['G4', '8n'],
+		// ['F4', '2n'],
 
-		['G4', '4n'],
-		['B4', '4n'],
-		['D4', '4n'],
+		// ['C4', '4n'],
+		// ['A4', '4n'],
+		// ['A4', '4n'],
 
-		['C4', '8n'],
-		['H4', '8n'],
-		['F4', '2n'],
+		// ['B4', '8n'],
+		// ['A4', '8n'],
+		// ['G4', '4n'],
+		// ['G4', '4n'],
 
-		['C4', '4n'],
-		['A4', '4n'],
-		['A4', '4n'],
+		// ['G4', '4n'],
+		// ['B4', '4n'],
+		// ['D4', '4n'],
+
+		// ['C4', '8n'],
+		// ['H4', '8n'],
+		// ['F4', '2n'],
+
+		// ['C4', '4n'],
+		// ['A4', '4n'],
+		// ['A4', '4n'],
 
 	]
 
-	notesToPlay.forEach(note => play(...note))
+	// notesToPlay.forEach(rytm => {
+	// 	const [r, n] = rytm;
+	// 	r.split('').forEach(l => play(`${l.toUpperCase()}3`, n))
+	// })
+
+	notesToPlay.forEach(notes => play(...notes))
 
 	// play('F4', '4n');
 	// play('E4', '8n');
@@ -167,8 +185,6 @@ const playSong2 = () => {
 	// play('C4', '2n');
 	
 }
-
-playSong2();
 
 export default () => {
 	const [state, setState] = useState({play: false})
