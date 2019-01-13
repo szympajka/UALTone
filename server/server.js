@@ -24,13 +24,13 @@ app.listen(port, () => {
 });
 
 app.route('/').get(async (req, res) => {
-  const { imageURI } = req.query;
+  const { imageURI, photoID } = req.query;
 
   if (!imageURI) {
     return res.status(400).send(errors.URL_NOT_DEFINED);
   }
 
-  const responce = await getImageDescriptors({ imageURI });
+  const responce = await getImageDescriptors({ imageURI, photoID });
 
   return res.send(responce);
 });

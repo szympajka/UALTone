@@ -1,6 +1,7 @@
 // ####### Declarations ##########
 const fetch = require('node-fetch');
 const lodash = require('lodash');
+const fs = require('fs');
 const { words } = require('../words');
 const wordsStats = require('../words_stats.js');
 
@@ -28,6 +29,7 @@ const consts = {
 
 const defaultParams = {
   imageURI: '',
+  photoID: 0,
 };
 
 // ####### Resolver ##########
@@ -63,7 +65,7 @@ const resolve = (payload, type) => {
 // ####### Modules ##########
 const getImageDescriptors = async (params = defaultParams) => {
   const result = [];
-  const { imageURI } = params;
+  const { imageURI, photoID } = params;
 
   const data = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${consts.API_KEY}`, {
     method: 'POST',
@@ -82,6 +84,13 @@ const getImageDescriptors = async (params = defaultParams) => {
   });
 
   const { responses } = await data.json();
+
+  console.log('responces', responses);
+
+  fs.writeFile(`../resolved/${photoID}.js`, `module.export = ${JSON.stringify(responses)}`, (err) => {
+    if (err) return console.log(err);
+    console.log('Success');
+  });
 
   lodash.forEach(responses, (responce) => {
     lodash.forEach(responce, (payload, type) => {

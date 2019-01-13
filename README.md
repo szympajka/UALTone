@@ -1,6 +1,8 @@
 # Bibliography, References, Materials:
 
 - Neil Harbisson's talk about his experience of seeing colors: https://www.ted.com/talks/neil_harbisson_i_listen_to_color/transcript
+- Neil Harbisson's talk about his experience of seeing colors: https://vimeo.com/118166526
+- Neil Harbisson's website: https://www.cyborgarts.com
 - Google AI Service to process images: https://cloud.google.com/vision
 - Google Vision API package: https://github.com/googleapis/nodejs-vision
 - Google Cloud Console to manage AI services: https://console.cloud.google.com
@@ -21,10 +23,20 @@
 - Article about notes anathomy: https://www.dummies.com/art-center/music/guitar/how-musical-notes-are-constructed/
 - Notes examples: https://www.google.com/search?q=nuty+z+literami+na+keyboard
 - Spotted problem explanation: https://github.com/Tonejs/Tone.js/issues/347
-- Article how to set up env variable on Mac: https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255
+- Env variables setup on Mac: https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255
 - Example Base64 format image: https://jsfiddle.net/casiano/Xadvz/
 - JS Liblary for reading QR codes: https://github.com/schmich/instascan
 - JS Liblary to generate QR codes: https://davidshimjs.github.io/qrcodejs
-- Image explaining placement of different octaves in piano keyboard: http://www.piano-keyboard-guide.com/wp-content/uploads/2015/05/piano_keyboard_picture.jpg
+- Octaves placement in piano keyboard: http://www.piano-keyboard-guide.com/wp-content/uploads/2015/05/piano_keyboard_picture.jpg
 - JS Liblary to create staffs: https://abcjs.net/abcjs-editor.html
-- 
+- Amazing website to transform names into music: http://www.clarallel.com/
+- Amazing 3D piano: https://www.borjamorales.com/3d-piano-player/
+- Amazing Liblary for MIDI + examples: https://github.com/mudcube/MIDI.js/
+- Theory for colors in music: http://theconversation.com/every-song-has-a-color-and-an-emotion-attached-to-it-45537 
+- Letter-Color Synaesthesia: http://otherthings.com/uw/syn/
+- Study about Colors of Music: http://lukemckernan.com/2014/08/21/colour-music/
+- Study about Colors of Music: http://www.cymaticmusic.co.uk/colour-harmony.html
+- Beyond Gravity: https://flytestore.com/blogs/news/beyond-gravity-episode-4
+- Xylophone (determinant for my colors): https://www.musick8.com/products/2452.jpg
+- Color Swatches: https://dev.imglish.com/szympajka/swatches
+

@@ -63,7 +63,7 @@ export default () => {
     const album = await (await ShareApi.getAlbum({ id: state.albumID })).json();
 
     await asyncForEach(album.message.photos, async (photo) => {
-      const notes = await (await fetch(`http://127.0.0.1:9999?imageURI=${encodeURIComponent(photo.file.path)}`)).json();
+      const notes = await (await fetch(`http://127.0.0.1:9999?photoID=${photo.id}&imageURI=${encodeURIComponent(photo.file.path)}`)).json();
       data.push(notes);
     });
 
