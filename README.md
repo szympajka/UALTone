@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Bibliography, References, Materials:
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Neil Harbisson's talk about his experience of seeing colors: https://www.ted.com/talks/neil_harbisson_i_listen_to_color/transcript
+- Google AI Service to process images: https://cloud.google.com/vision
+- Google Vision API package: https://github.com/googleapis/nodejs-vision
+- Google Cloud Console to manage AI services: https://console.cloud.google.com
+- JS Framework for creating interactive music in the browser: https://github.com/Tonejs/
+- NodeJS Framework for creating REST APIs: https://expressjs.com
+- My JS snippet showing me basic usage: https://jsfiddle.net/dk859zvw/
+- ToneJS documentation: https://tonejs.github.io/docs/
+- ToneJS alternative: https://popmotion.io/pose/
+- Wiki explenation for note: https://en.wikipedia.org/wiki/Musical_note
+- Wiki explenation for clef: https://en.wikipedia.org/wiki/Clef
+- Wiki explenation for staff: https://en.wikipedia.org/wiki/Staff_(music)
+- Wiki explenation for normal distribution: https://en.wikipedia.org/wiki/Normal_distribution
+- Series of videos explenation basic music skills: https://www.khanacademy.org/humanities/music/music-basics2#notes-rhythm
+- Polish simplest melody for learning how to play notes: http://nuty-keyboard-i-flet.blogspot.com/2012/01/wlaz-kotek.html
+- Article about `WebAudio`: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
+- Video explaining basic of music five-line staff: https://www.youtube.com/watch?v=MupowC5CEvE
+- Examples for placing notes on staff: http://live-act.pl/wp-content/uploads/2015/08/Przyk%C5%82ady.pdf
+- Article about notes anathomy: https://www.dummies.com/art-center/music/guitar/how-musical-notes-are-constructed/
+- Notes examples: https://www.google.com/search?q=nuty+z+literami+na+keyboard
+- Spotted problem explanation: https://github.com/Tonejs/Tone.js/issues/347
+- Article how to set up env variable on Mac: https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255
+- Example Base64 format image: https://jsfiddle.net/casiano/Xadvz/
+- JS Liblary for reading QR codes: https://github.com/schmich/instascan
+- JS Liblary to generate QR codes: https://davidshimjs.github.io/qrcodejs
+- Image explaining placement of different octaves in piano keyboard: http://www.piano-keyboard-guide.com/wp-content/uploads/2015/05/piano_keyboard_picture.jpg
+- JS Liblary to create staffs: https://abcjs.net/abcjs-editor.html
+- 

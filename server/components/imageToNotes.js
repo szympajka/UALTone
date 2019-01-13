@@ -31,6 +31,11 @@ const defaultParams = {
 };
 
 // ####### Resolver ##########
+const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi;
+const syllabify = word => word.match(syllableRegex);
+
+console.log(['away', 'hair', 'halter', 'hairspray', 'father', 'lady', 'kid'].map(syllabify));
+
 const resolve = (payload, type) => {
   if (type === consts.reponces.labelAnnotations) {
     return lodash.flattenDeep(
@@ -40,6 +45,7 @@ const resolve = (payload, type) => {
         return lodash.map(descriptors, (descriptor) => {
           const wordIndex = lodash.indexOf(words, descriptor);
           const indexSum = wordIndex.toString().split('').map(Number).reduce((a, b) => (a + b), 0);
+
 
           return {
             description: descriptor,
