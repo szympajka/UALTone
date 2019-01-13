@@ -27,22 +27,28 @@ const consts = {
 };
 
 const defaultParams = {
-  base64Image: '',
+  imageURI: '',
 };
 
 // ####### Resolver ##########
 const resolve = (payload, type) => {
   if (type === consts.reponces.labelAnnotations) {
-    return lodash.map(payload, (entry) => {
-      const wordIndex = lodash.indexOf(words, entry.description);
-      const indexSum = wordIndex.toString().split('').map(Number).reduce((a, b) => (a + b), 0);
+    return lodash.flattenDeep(
+      lodash.map(payload, (entry) => {
+        const descriptors = entry.description.split(' ');
 
-      return {
-        description: entry.description,
-        note: entry.description.length / 10,
-        octave: wordsStats.octaves[indexSum],
-      };
-    });
+        return lodash.map(descriptors, (descriptor) => {
+          const wordIndex = lodash.indexOf(words, descriptor);
+          const indexSum = wordIndex.toString().split('').map(Number).reduce((a, b) => (a + b), 0);
+
+          return {
+            description: descriptor,
+            note: Number((descriptor.length / 20).toFixed(2)),
+            octave: wordsStats.octaves[indexSum],
+          };
+        });
+      }),
+    );
   }
 
   return [];
@@ -51,7 +57,7 @@ const resolve = (payload, type) => {
 // ####### Modules ##########
 const getImageDescriptors = async (params = defaultParams) => {
   const result = [];
-  const { base64Image } = params;
+  const { imageURI } = params;
 
   const data = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${consts.API_KEY}`, {
     method: 'POST',
@@ -59,7 +65,9 @@ const getImageDescriptors = async (params = defaultParams) => {
       requests: [
         {
           image: {
-            content: base64Image,
+            source: {
+              imageUri: imageURI,
+            },
           },
           features: consts.requests.types.map(type => ({ type, maxResults: 50 })),
         },

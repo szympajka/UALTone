@@ -24,15 +24,13 @@ app.listen(port, () => {
 });
 
 app.route('/').get(async (req, res) => {
-  const { url } = req.query;
+  const { imageURI } = req.query;
 
-  if (!url) {
+  if (!imageURI) {
     return res.status(400).send(errors.URL_NOT_DEFINED);
   }
 
-  const imageBuffer = await fetch(url).then(r => r.buffer());
-  const base64Image = imageBuffer.toString('base64');
-  const responce = await getImageDescriptors({ base64Image });
+  const responce = await getImageDescriptors({ imageURI });
 
   return res.send(responce);
 });
