@@ -4,6 +4,8 @@ const lodash = require('lodash');
 const fs = require('fs');
 const { words } = require('../words');
 const wordsStats = require('../words_stats.js');
+const colors = require('../../resolved/colors/colors.js');
+const tt2 = require('../../resolved/tt2');
 
 // ####### Defaults ##########
 const consts = {
@@ -33,10 +35,10 @@ const defaultParams = {
 };
 
 // ####### Resolver ##########
-const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi;
-const syllabify = word => word.match(syllableRegex);
+// const syllableRegex = /[^aeiouy]*[aeiouy]+(?:[^aeiouy]*$|[^aeiouy](?=[^aeiouy]))?/gi;
+// const syllabify = word => word.match(syllableRegex);
 
-console.log(['away', 'hair', 'halter', 'hairspray', 'father', 'lady', 'kid'].map(syllabify));
+// console.log(['away', 'hair', 'halter', 'hairspray', 'father', 'lady', 'kid'].map(syllabify));
 
 const resolve = (payload, type) => {
   if (type === consts.reponces.labelAnnotations) {
@@ -63,43 +65,44 @@ const resolve = (payload, type) => {
 };
 
 // ####### Modules ##########
-const getImageDescriptors = async (params = defaultParams) => {
-  const result = [];
-  const { imageURI, photoID } = params;
+const getImageDescriptors = async (params = defaultParams) => 
+  // const result = [];
+  // const { imageURI, photoID } = params;
 
-  const data = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${consts.API_KEY}`, {
-    method: 'POST',
-    body: JSON.stringify({
-      requests: [
-        {
-          image: {
-            source: {
-              imageUri: imageURI,
-            },
-          },
-          features: consts.requests.types.map(type => ({ type, maxResults: 50 })),
-        },
-      ],
-    }),
-  });
+  // const data = await fetch(`https://vision.googleapis.com/v1/images:annotate?key=${consts.API_KEY}`, {
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     requests: [
+  //       {
+  //         image: {
+  //           source: {
+  //             imageUri: imageURI,
+  //           },
+  //         },
+  //         features: consts.requests.types.map(type => ({ type, maxResults: 50 })),
+  //       },
+  //     ],
+  //   }),
+  // });
 
-  const { responses } = await data.json();
+  // const { responses } = await data.json();
 
-  console.log('responces', responses);
+  // console.log('responses', responses);
 
-  fs.writeFile(`../resolved/${photoID}.js`, `module.export = ${JSON.stringify(responses)}`, (err) => {
-    if (err) return console.log(err);
-    console.log('Success');
-  });
+  // // fs.writeFile(`../resolved/${photoID}.js`, `module.export = ${JSON.stringify(responses)}`, (err) => {
+  // //   if (err) return console.log(err);
+  // //   console.log('Success');
+  // // });
 
-  lodash.forEach(responses, (responce) => {
-    lodash.forEach(responce, (payload, type) => {
-      result.push(resolve(payload, type));
-    });
-  });
+  // lodash.forEach(responses, (responce) => {
+  //   lodash.forEach(responce, (payload, type) => {
+  //     result.push(resolve(payload, type));
+  //   });
+  // });
 
-  return result;
-};
+  // return result;
+   tt2
+;
 
 // ####### Export ##########
 module.exports = getImageDescriptors;

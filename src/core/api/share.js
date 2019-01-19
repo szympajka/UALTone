@@ -1,5 +1,5 @@
 const serverURL = 'https://devapi.imglish.com';
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDczOTg0ODcsImV4cCI6MTU0NzQwOTI4Nywic3ViIjoiMiJ9.7bdrSMGaVsXa05wYYSRMF-ISTokmUoUzv-rNjsoreOA';
+const token = window.location.hash.replace('#', '');
 
 const defaultParams = {
   id: 0,

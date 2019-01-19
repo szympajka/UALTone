@@ -14,6 +14,10 @@
 - Wiki explenation for note: https://en.wikipedia.org/wiki/Musical_note
 - Wiki explenation for clef: https://en.wikipedia.org/wiki/Clef
 - Wiki explenation for staff: https://en.wikipedia.org/wiki/Staff_(music)
+- Wiki explenation for MIDI: https://en.wikipedia.org/wiki/MIDI
+- Wiki explenation for Octave: https://en.wikipedia.org/wiki/Octave
+- Wiki explenation for Diatonic scale: https://en.wikipedia.org/wiki/Diatonic_scale
+- Wiki explenation for Semitone: https://en.wikipedia.org/wiki/Semitone
 - Wiki explenation for normal distribution: https://en.wikipedia.org/wiki/Normal_distribution
 - Series of videos explenation basic music skills: https://www.khanacademy.org/humanities/music/music-basics2#notes-rhythm
 - Polish simplest melody for learning how to play notes: http://nuty-keyboard-i-flet.blogspot.com/2012/01/wlaz-kotek.html
@@ -39,4 +43,6 @@
 - Beyond Gravity: https://flytestore.com/blogs/news/beyond-gravity-episode-4
 - Xylophone (determinant for my colors): https://www.musick8.com/products/2452.jpg
 - Color Swatches: https://dev.imglish.com/szympajka/swatches
+- Peter Saville: https://www.google.com/search?q=peter+saville+graphic+design
+- How to play bittersweet symphony on piano: https://www.youtube.com/watch?v=dw5iPebaYYk
 
