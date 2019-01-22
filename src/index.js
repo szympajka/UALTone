@@ -46,7 +46,8 @@ const App = props => (
   </React.Fragment>
 );
 
-if (window.location.hash.slice(0, 3) === '#t=') {
+if (window.location.hash === '#donteventry') {
+  console.log('Server Mode');
   scan();
 
   ReactDOM.render((
@@ -55,6 +56,7 @@ if (window.location.hash.slice(0, 3) === '#t=') {
     </App>
   ), document.getElementById('root'));
 } else {
+  console.log('Client Mode');
   ReactDOM.render((
     <App>
       <UserEnd />

@@ -177,7 +177,7 @@ const Notes = () => {
 
     // await asyncForEach(album.message.photos, async (photo) => {
     // const notes = await (await fetch(`http://127.0.0.1:9999?photoID=${photo.id}&imageURI=${encodeURIComponent(photo.file.path)}`)).json();
-    const notes = await (await fetch(`http://127.0.0.1:9999?photoID=${1}&imageURI=${1}`)).json();
+    const notes = await (await fetch(`${process.env.REACT_APP_API_URL}?photoID=${1}&imageURI=${1}`)).json();
     data.push(notes);
     // });
 
