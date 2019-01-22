@@ -6,7 +6,7 @@
 - Google AI Service to process images: https://cloud.google.com/vision
 - Google Vision API package: https://github.com/googleapis/nodejs-vision
 - Google Cloud Console to manage AI services: https://console.cloud.google.com
-- JS Framework for creating interactive music in the browser: https://github.com/Tonejs/
+- JS Framework for creating interactive music in the browser: https://github.com/Tonejs
 - NodeJS Framework for creating REST APIs: https://expressjs.com
 - My JS snippet showing me basic usage: https://jsfiddle.net/dk859zvw/
 - ToneJS documentation: https://tonejs.github.io/docs/
@@ -24,11 +24,11 @@
 - Article about `WebAudio`: https://developers.google.com/web/updates/2017/09/autoplay-policy-changes#webaudio
 - Video explaining basic of music five-line staff: https://www.youtube.com/watch?v=MupowC5CEvE
 - Examples for placing notes on staff: http://live-act.pl/wp-content/uploads/2015/08/Przyk%C5%82ady.pdf
-- Article about notes anathomy: https://www.dummies.com/art-center/music/guitar/how-musical-notes-are-constructed/
+- Article about notes anathomy: https://www.dummies.com/art-center/music/guitar/how-musical-notes-are-constructed
 - Notes examples: https://www.google.com/search?q=nuty+z+literami+na+keyboard
 - Spotted problem explanation: https://github.com/Tonejs/Tone.js/issues/347
 - Env variables setup on Mac: https://medium.com/@himanshuagarwal1395/setting-up-environment-variables-in-macos-sierra-f5978369b255
-- Example Base64 format image: https://jsfiddle.net/casiano/Xadvz/
+- Example Base64 format image: https://jsfiddle.net/casiano/Xadvz
 - JS Liblary for reading QR codes: https://github.com/schmich/instascan
 - JS Liblary to generate QR codes: https://davidshimjs.github.io/qrcodejs
 - Octaves placement in piano keyboard: http://www.piano-keyboard-guide.com/wp-content/uploads/2015/05/piano_keyboard_picture.jpg
@@ -45,4 +45,9 @@
 - Color Swatches: https://dev.imglish.com/szympajka/swatches
 - Peter Saville: https://www.google.com/search?q=peter+saville+graphic+design
 - How to play bittersweet symphony on piano: https://www.youtube.com/watch?v=dw5iPebaYYk
+- Jamie xx - "Girl": https://www.youtube.com/watch?v=r7gmVWgEpRc
+- About Jamie xx: https://en.wikipedia.org/wiki/Jamie_xx
+- About Sam Winston: http://www.samwinston.com
+- About Airbnb font: https://airbnb.design/cereal
+- About Indexhibit, CMS for creatives: https://www.indexhibit.org
 
