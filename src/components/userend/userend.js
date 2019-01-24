@@ -44,6 +44,8 @@ const ButtonsBox = styled.div`
   padding-bottom: 18px
   box-sizing: border-box;
   bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
 `
 const Separator = styled.div`
@@ -75,6 +77,14 @@ const Back = styled.button`
   text-align: right;
   white-space: nowrap;
 `
+const UploadBox = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+`
 
 class UserEnd extends React.Component {
   constructor(props) {
@@ -91,6 +101,7 @@ class UserEnd extends React.Component {
     this.generateQR = this.generateQR.bind(this)
     this.getQR = this.getQR.bind(this)
     this.getView = this.getView.bind(this)
+    this.getUploadStats = this.getUploadStats.bind(this)
   }
   
   addPhotos(pms = {}) {
@@ -117,18 +128,39 @@ class UserEnd extends React.Component {
   }
 
   getQR() {
-    return <GetQR onClick={() => this.generateQR()} tabIndex="0" type="button">Get your pass</GetQR>     
+    return <GetQR onClick={() => this.generateQR()} tabIndex="0" type="button">Get your ticket</GetQR>     
   }
 
   goBack() {
     const goback = () => {
-      this.fuse.clearAll()
-      this.setState({
-        qr: null
-      })
+      window.location.reload()
     }
 
     return <Back onClick={goback} tabIndex="0" type="button"> ← Start again</Back>  
+  }
+
+  getUploadStats() {
+    const { files } = this.fuse.getGlobalState();
+    const [uploadedFiles] = this.fuse.countUploadedFiles();
+    return (
+      <UploadBox>
+        <div class="sk-fading-circle" style={{ display: uploadedFiles - files.length ? 'block' : 'none'}}>
+          <div class="sk-circle1 sk-circle"></div>
+          <div class="sk-circle2 sk-circle"></div>
+          <div class="sk-circle3 sk-circle"></div>
+          <div class="sk-circle4 sk-circle"></div>
+          <div class="sk-circle5 sk-circle"></div>
+          <div class="sk-circle6 sk-circle"></div>
+          <div class="sk-circle7 sk-circle"></div>
+          <div class="sk-circle8 sk-circle"></div>
+          <div class="sk-circle9 sk-circle"></div>
+          <div class="sk-circle10 sk-circle"></div>
+          <div class="sk-circle11 sk-circle"></div>
+          <div class="sk-circle12 sk-circle"></div>
+        </div>
+        {`${uploadedFiles}/${files.length}`}
+      </UploadBox>
+    )
   }
 
   getView() {
@@ -144,11 +176,14 @@ class UserEnd extends React.Component {
 
     if (this.fuse.getGlobalState().files.length) {
       return (
-        <ButtonsBox>
-          {this.addPhotos({ small: true })}
-          <Separator />
-          {this.getQR()}
-        </ButtonsBox>
+        <React.Fragment>
+          {this.getUploadStats()}
+          <ButtonsBox>
+            {this.addPhotos({ small: true })}
+            <Separator />
+            {this.getQR()}
+          </ButtonsBox>
+        </React.Fragment>
       )
     }
   

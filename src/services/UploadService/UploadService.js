@@ -19,7 +19,7 @@ import { groupBy, forEach, remove, take, find, isFunction, has } from 'lodash';
 // ####### Defaults ##########
 const CONSTS = {
   NEW_ALBUM: 'NEW_ALBUM',
-  FILES_PER_UPLOAD: 3,
+  FILES_PER_UPLOAD: 1,
   STATUS: {
     ERROR: 'ERROR',
     PAUSED: 'PAUSED',
@@ -256,6 +256,8 @@ class UploadService {
     if (!route) return;
 
     globalState.files.push(...files.map(file => new FileUploader({ file, route, uploadFiles, populateChanges })));
+
+    populateChanges();
     this.uploadFiles();
   }
 

@@ -1,18 +1,16 @@
 // ####### Declarations ##########
-import React, { useState } from 'react';
+import React from 'react';
 import Tone from 'tone';
 import styled from 'styled-components';
-import {
-  flattenDeep, map, forEach, size, random, findIndex, indexOf, toArray,
-} from 'lodash';
+import { flattenDeep, forEach, map, size, random, indexOf, toArray, groupBy } from 'lodash';
 import ShareApi from '../../core/api/share';
 import octaves from '../../sources/octaves';
 
 // ####### Styled Components #############
 const Octaves = styled.div`
   position: relative;
-  width: ${(window.innerWidth / 3)}px;
-  height: ${(window.innerWidth / 3)}px;
+  width: ${window.innerWidth}px;
+  height: ${window.innerHeight}px;
   background: #000;
   color: #fff;
   display: flex;
@@ -33,16 +31,43 @@ const Title = styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
+const Title2 = styled.h1`
+  font-size: 3em;
+  color: inherit;
+`
+const Title3 = styled.h1`
+  font-size: 3em;
+
+  &:after{
+    animation: changeLetter 120s linear infinite alternate;
+    content: 'Wait'
+  }
+`
+const ColorBox = styled.div`
+  transform: scale(1.5);
+  margin: 0;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: color 1080s infinite ease-in-out both;
+`
 const OctaveKey = styled.div`
   // border-top-left-radius: ${() => random(0, size(octaves))}px;
   // border-top-right-radius: ${() => random(0, size(octaves))}px;
   // border-bottom-left-radius: ${() => random(0, size(octaves))}px;
   // border-bottom-right-radius: ${() => random(0, size(octaves))}px;
-  width: ${(window.innerWidth / 3) / (size(octaves) / 7)}px;
-  height: ${(window.innerWidth / 3) / (size(octaves) / 7)}px;
-  // color: transparent;
-  color: #000;
+  width: ${(window.innerWidth) / (size(octaves) / 7)}px;
+  height: ${(window.innerHeight) / (size(octaves) / 7)}px;
+  color: transparent;
+  //color: #000;
   font-size: 16px;
   display: flex;
   background-color: #000;
@@ -71,6 +96,17 @@ const Btn = styled.div`
   display: inline-block;
   border: solid 1px;
 `;
+const I = styled.span`
+  border: solid 2px;
+  animation: cooolor 1080s infinite ease-in-out both;
+  padding: 9px 16px;
+  border-radius: 30px;
+  display: inline-block;
+  filter: invert(1);
+  margin: 0 10px;
+`
+const II = styled.span`
+`
 
 // ####### Helpers ##########
 const colorArray = [
@@ -95,126 +131,141 @@ const asyncForEach = async (array, callback) => {
 // ####### Functions ##########
 const synth = new Tone.Synth().toMaster();
 
-const playSequence = (state, setState) => {
-  Tone.Transport.stop();
-
-  const notes = [];
-
-  const getToneTime = (note = '4n') => {
-    let notetime = Tone.now();
-
-    notes.forEach((n) => {
-      notetime += n;
-    });
-
-    notes.push(note);
-
-    console.log('notetime', notetime);
-
-    return notetime;
-  };
-
-  const play = (o, n, d) => {
-    Tone.Transport.schedule((time) => {
-      synth.triggerAttackRelease(o, n, time);
-      Tone.Draw.schedule(() => {
-        document.getElementById('text').innerHTML = d;
-        document.getElementById('text').style.color = colorArray[indexOf(toArray(octaves), o)];
-        document.getElementById(o).style.backgroundColor = colorArray[indexOf(toArray(octaves), o)];
-      }, time);
-
-      Tone.Draw.schedule(() => {
-        document.getElementById(o).style.backgroundColor = '';
-      }, time + Tone.Time(n).toSeconds());
-    }, getToneTime(n));
-  };
-
-  state.data.forEach((m) => {
-    const { octave, note, description } = m;
-    play(octave, note, description);
-  });
-
-  Tone.Transport.schedule(() => {
-    document.getElementById('text').innerHTML = '';
-    setState({ ...state, data: [], ongoing: false });
-    window.scan();
-  }, getToneTime());
-
-  Tone.Transport.start();
-};
-
 // ####### Composing view ##########
-const Notes = () => {
-  console.log('render');
-  const [state, setState] = useState({
-    ongoing: false,
-    data: [],
-    albumID: 0,
-    play: '',
-  });
 
-  const getNotes = () => {
-    setState({
-      ...state,
-      ongoing: true,
-    });
-  };
+class Notes extends React.Component {
+  constructor(props) {
+    super(props)
 
-  const fetchNotes = async () => {
-    if (!window.code) {
-      window.code = 422;
+    this.state = {
+      data: null,
+      wait: false,
     }
 
+    this.fetchNotes = this.fetchNotes.bind(this)
+    this.playSequence = this.playSequence.bind(this)
+  }
+
+  playSequence() {
+    Tone.Transport.stop();
+  
+    const notes = [];
+  
+    const getToneTime = (note = '4n') => {
+      let notetime = 0;
+  
+      notes.forEach((n) => {
+        notetime += n;
+      });
+  
+      notes.push(note);
+  
+      console.log('notetime', notetime);
+  
+      return notetime;
+    };
+  
+    const play = (o, n, d) => {
+      Tone.Transport.schedule((time) => {
+        synth.triggerAttackRelease(o, n, time);
+        Tone.Draw.schedule(() => {
+          document.getElementById('text').innerHTML = d;
+          document.getElementById('text').style.color = colorArray[indexOf(toArray(octaves), o)];
+          document.getElementById(o).style.backgroundColor = colorArray[indexOf(toArray(octaves), o)];
+        }, time);
+  
+        Tone.Draw.schedule(() => {
+          document.getElementById(o).style.backgroundColor = '';
+        }, time + Tone.Time(n).toSeconds());
+      }, getToneTime(n));
+    };
+  
+    forEach(groupBy(this.state.data, 'index'), (group) => {
+      forEach(group, (m) => {
+        const { octave, note, description } = m;
+        play(octave, note, description);
+      })
+    })
+  
+    Tone.Transport.schedule(() => {
+      window.location.reload();
+    }, getToneTime() + Tone.Time('1n').toSeconds());
+  
+    Tone.Transport.start();
+  }
+
+  async fetchNotes () {
+    if (!window.code) {
+      this.setState({ 
+        wait: false,
+        data: null
+      })
+
+      return false;
+    }
+
+    this.setState({
+      wait: true
+    })
+
     const data = [];
-    // const album = await (await ShareApi.getAlbum({ id: window.code })).json();
+    const album = await ShareApi.getAlbum({ id: window.code })
 
-    // await asyncForEach(album.message.photos, async (photo) => {
-    // const notes = await (await fetch(`http://127.0.0.1:9999?photoID=${photo.id}&imageURI=${encodeURIComponent(photo.file.path)}`)).json();
-    const notes = await (await fetch(`${process.env.REACT_APP_API_URL}?photoID=${1}&imageURI=${1}`)).json();
-    data.push(notes);
-    // });
+    await asyncForEach(album.message.photos, async (photo) => {
+      const notesData = await fetch(`${process.env.REACT_APP_API_URL}?photoID=${photo.id}&imageURI=${encodeURIComponent(photo.file.path)}`)
+      const notes = await notesData.json();
+      data.push(notes);
+    });
 
-    setState({ ...state, data: flattenDeep(data), ongoing: false });
+    this.setState({
+      wait: false,
+      data: map(flattenDeep(data), (note) => {
+        if (!note.octave) {
+          note.octave = "C4"
+        }
+
+        return note
+      })
+    })
   };
 
-  if (state.ongoing) {
-    fetchNotes();
+  getWelcome() {
+    if (this.state.wait) {
+      return <ColorBox><Title3 /></ColorBox>
+    }
+
+    return (
+      <ColorBox>
+        <Title2>SCAN YOUR TICKET TO PLAY</Title2>
+        <p style={{ fontSize: '1.5em' }}>
+          To get ticket, go to
+          <I><II>bit.ly/digdom</II></I>
+          on your mobile device
+        </p>
+      </ColorBox> 
+    )
   }
 
-  if (state.data.length) {
-    console.log(state.data);
-    playSequence(state, setState);
+  componentDidUpdate() {
+    if (this.state.data) {
+      this.playSequence();
+    }
   }
 
-  return (
-    <React.Fragment>
-      <div>
-        <Btn
-          type="button"
-          onClick={getNotes}
-        >
-          {state.ongoing ? 'Fetching...' : 'Release'}
-        </Btn>
-      </div>
-      <Title id="text" />
-
-      <Octaves>
-        {map(octaves, (octave, i) => (
-          <OctaveKey
-            type="tone"
-            id={octave}
-            key={octave}
-            octave={octave}
-            color={colorArray[i]}
-            play={octave === state.play}
-          >
-            {octave}
-          </OctaveKey>
-        ))}
-      </Octaves>
-
-    </React.Fragment>
-  );
-};
+  render() {
+    return (
+      <React.Fragment>
+        {this.state.data ? null : this.getWelcome()}
+        <Btn type="button" onClick={this.fetchNotes} />
+        <Title id="text" />
+        <Octaves>
+          {map(octaves, (octave, i) => (
+            <OctaveKey type="tone" id={octave} key={octave} octave={octave} color={colorArray[i]}>{octave}</OctaveKey>
+          ))}
+        </Octaves>
+      </React.Fragment>
+    );
+  }
+}
 
 export default Notes;

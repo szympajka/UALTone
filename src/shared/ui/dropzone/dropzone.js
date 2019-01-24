@@ -253,9 +253,6 @@ class DropZone extends CreatePureComponent {
         >
           {dropzoneActive && (
             <div style={overlayStyle}>
-              <i className="material-icons" style={{ fontSize: '8rem' }}>
-                add_photo_alternate
-              </i>
               <h3>Drop files Here</h3>
             </div>
           )}
