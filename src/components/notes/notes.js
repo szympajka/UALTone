@@ -57,7 +57,8 @@ const ColorBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: color 1080s infinite ease-in-out both;
+  animation: color 1024s infinite ease-in-out both;
+  animation-direction: reverse;
 `
 const OctaveKey = styled.div`
   // border-top-left-radius: ${() => random(0, size(octaves))}px;
@@ -98,14 +99,14 @@ const Btn = styled.div`
 `;
 const I = styled.span`
   border: solid 2px;
-  animation: cooolor 1080s infinite ease-in-out both;
+  animation: cooolor 768s infinite ease-in-out both;
   padding: 9px 16px;
   border-radius: 30px;
   display: inline-block;
-  filter: invert(1);
   margin: 0 10px;
 `
 const II = styled.span`
+animation: color 768s infinite ease-in-out both;
 `
 
 // ####### Helpers ##########

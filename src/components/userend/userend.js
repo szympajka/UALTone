@@ -138,7 +138,7 @@ class UserEnd extends React.Component {
 
     return <Back onClick={goback} tabIndex="0" type="button"> ← Start again</Back>  
   }
-
+  
   getUploadStats() {
     const { files } = this.fuse.getGlobalState();
     const [uploadedFiles] = this.fuse.countUploadedFiles();
