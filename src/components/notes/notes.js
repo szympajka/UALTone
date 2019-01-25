@@ -2,7 +2,7 @@
 import React from 'react';
 import Tone from 'tone';
 import styled from 'styled-components';
-import { flattenDeep, forEach, map, size, random, indexOf, toArray, groupBy } from 'lodash';
+import { flattenDeep, forEach, map, slice, size, random, indexOf, toArray, groupBy, maxBy } from 'lodash';
 import ShareApi from '../../core/api/share';
 import octaves from '../../sources/octaves';
 
@@ -149,55 +149,91 @@ class Notes extends React.Component {
 
   playSequence() {
     Tone.Transport.stop();
-  
+
     const notes = [];
-  
-    const getToneTime = (note = '4n') => {
+
+    const getToneTime = (note = '4n', push = true) => {
       let notetime = 0;
-  
+
       notes.forEach((n) => {
         notetime += n;
       });
-  
-      notes.push(note);
-  
+
+      if (push) {
+        notes.push(note);
+      }
+
       console.log('notetime', notetime);
-  
+
       return notetime;
     };
-  
-    const play = (o, n, d) => {
-      Tone.Transport.schedule((time) => {
-        synth.triggerAttackRelease(o, n, time);
-        Tone.Draw.schedule(() => {
-          document.getElementById('text').innerHTML = d;
-          document.getElementById('text').style.color = colorArray[indexOf(toArray(octaves), o)];
-          document.getElementById(o).style.backgroundColor = colorArray[indexOf(toArray(octaves), o)];
-        }, time);
-  
-        Tone.Draw.schedule(() => {
-          document.getElementById(o).style.backgroundColor = '';
-        }, time + Tone.Time(n).toSeconds());
-      }, getToneTime(n));
+
+    // const play = (o, n, d, g) => {
+    const play = (group) => {
+      console.log(group)
+
+      if (group.length === 1) {
+        const { octave: o, note: n, description: d } = group[0];
+        Tone.Transport.schedule((time) => {
+          synth.triggerAttackRelease(o, n, time);
+          Tone.Draw.schedule(() => {
+            document.getElementById('text').innerHTML = d;
+            document.getElementById('text').style.color = colorArray[indexOf(toArray(octaves), o)];
+            document.getElementById(o).style.backgroundColor = colorArray[indexOf(toArray(octaves), o)];
+          }, time);
+
+          Tone.Draw.schedule(() => {
+            document.getElementById(o).style.backgroundColor = '';
+          }, time + Tone.Time(n).toSeconds());
+        }, getToneTime(n));
+      } else {
+        forEach(group, (m) => {
+          let desc = []
+          const { octave: o, note: n, description: d } = m;
+
+          forEach(group, (tt) => desc.push(tt.description))
+
+          Tone.Transport.schedule((time) => {
+            synth.triggerAttackRelease(o, n, time);
+            Tone.Draw.schedule(() => {
+              document.getElementById('text').innerHTML = desc.join(' ');
+              document.getElementById('text').style.color = colorArray[indexOf(toArray(octaves), o)];
+              document.getElementById(o).style.backgroundColor = colorArray[indexOf(toArray(octaves), o)];
+            }, time);
+
+            Tone.Draw.schedule(() => {
+              document.getElementById(o).style.backgroundColor = '';
+            }, time + Tone.Time(n).toSeconds());
+          }, getToneTime(n, false));
+        })
+
+        // forEach(group, (m) => {
+          notes.push(maxBy(group, "note").note);
+        // })
+      }
+
     };
-  
-    forEach(groupBy(this.state.data, 'index'), (group) => {
-      forEach(group, (m) => {
-        const { octave, note, description } = m;
-        play(octave, note, description);
-      })
+
+    console.log(groupBy(this.state.data, 'index'))
+
+    forEach(this.state.data, (group) => {
+      play(group)
+      // forEach(group, (m) => {
+      //   const { octave, note, description } = m;
+      //   play(octave, note, description, group.length);
+      // })
     })
-  
+
     Tone.Transport.schedule(() => {
-      window.location.reload();
+      // window.location.reload();
     }, getToneTime() + Tone.Time('1n').toSeconds());
-  
+
     Tone.Transport.start();
   }
 
-  async fetchNotes () {
+  async fetchNotes() {
     if (!window.code) {
-      this.setState({ 
+      this.setState({
         wait: false,
         data: null
       })
@@ -218,15 +254,44 @@ class Notes extends React.Component {
       data.push(notes);
     });
 
+    const nextData = groupBy(map(flattenDeep(data), (note) => {
+      if (!note.octave) {
+        note.octave = "C4"
+      }
+
+      return note
+    }), 'index')
+
+    const finalData = []
+
+    forEach(nextData, (piece) => {
+      const divideMore = []
+
+      forEach(piece, (rr, ii) => {
+        if (rr.description[0] === rr.description[0].toUpperCase()) {
+          divideMore.push(ii)
+        }
+      })
+
+      console.log('piece', piece)
+      console.log('divideMore', divideMore)
+
+      forEach(divideMore, (num, ind) => {
+        if (divideMore[ind + 1]){
+          finalData.push(slice(piece, num, divideMore[ind + 1]))
+          console.log('slice(piece, num, divideMore[ind + 1])', slice(piece, num, divideMore[ind + 1]))
+        } else {
+          finalData.push(slice(piece, num, piece.length))
+          console.log('slice(piece, num, piece.length)', slice(piece, num, piece.length))
+        }
+      })
+
+      console.log('=----------------------=')
+    })
+
     this.setState({
       wait: false,
-      data: map(flattenDeep(data), (note) => {
-        if (!note.octave) {
-          note.octave = "C4"
-        }
-
-        return note
-      })
+      data: finalData
     })
   };
 
@@ -243,7 +308,7 @@ class Notes extends React.Component {
           <I><II>bit.ly/digdom</II></I>
           on your mobile device
         </p>
-      </ColorBox> 
+      </ColorBox>
     )
   }
 
