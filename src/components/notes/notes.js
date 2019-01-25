@@ -225,7 +225,7 @@ class Notes extends React.Component {
     })
 
     Tone.Transport.schedule(() => {
-      // window.location.reload();
+      window.location.reload();
     }, getToneTime() + Tone.Time('1n').toSeconds());
 
     Tone.Transport.start();
