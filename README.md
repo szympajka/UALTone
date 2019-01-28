@@ -1,4 +1,19 @@
-# Bibliography, References, Materials:
+# Industry Research links and my bests
+
+## Outome in the presentation day:
+https://drive.google.com/open?id=1bdVDsWJfmjWwU-NGlHrZSs-xFOX9ED58
+
+## Medium
+Medium is for me one of the best sources for research in terms of storytelling as is something between Stackoverflow (Q&A form) and Documentaton websites. It is just impossible and wastefull to print every single article I found usefull.
+
+Website: https://medium.com
+
+## Brand New - amazing hub for rebrandings
+This is the same story as with Medium. Since I heard about it I have read dosents of articles and it improved my key skills for making branding and identity which taste good
+
+Website: https://www.underconsideration.com/brandnew
+
+## Bibliography, References, Materials:
 
 - Neil Harbisson's talk about his experience of seeing colors: https://www.ted.com/talks/neil_harbisson_i_listen_to_color/transcript
 - Neil Harbisson's talk about his experience of seeing colors: https://vimeo.com/118166526
